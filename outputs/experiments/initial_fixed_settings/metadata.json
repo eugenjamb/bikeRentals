@@ -1,0 +1,144 @@
+{
+  "status": "initial fixed-setting comparison; final test untouched",
+  "selection_metric": "unweighted mean fold MAE",
+  "best_learned_model": "hist_gradient_boosting",
+  "best_overall_including_baselines": "hist_gradient_boosting",
+  "prediction_postprocessing": "clip negative predictions to zero",
+  "feature_columns": [
+    "hour",
+    "weekday",
+    "month",
+    "is_weekend",
+    "holiday",
+    "workingday",
+    "days_since_start",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "month_sin",
+    "month_cos",
+    "demand_lag_1",
+    "demand_lag_2",
+    "demand_lag_24",
+    "demand_lag_48",
+    "demand_lag_168",
+    "demand_mean_24",
+    "demand_std_24",
+    "demand_mean_168",
+    "demand_std_168"
+  ],
+  "model_parameters": {
+    "ridge": {
+      "alpha": 1.0,
+      "copy_X": true,
+      "fit_intercept": true,
+      "max_iter": null,
+      "positive": false,
+      "random_state": null,
+      "solver": "auto",
+      "tol": 0.0001
+    },
+    "random_forest": {
+      "bootstrap": true,
+      "ccp_alpha": 0.0,
+      "criterion": "squared_error",
+      "max_depth": null,
+      "max_features": 1.0,
+      "max_leaf_nodes": null,
+      "max_samples": null,
+      "min_impurity_decrease": 0.0,
+      "min_samples_leaf": 1,
+      "min_samples_split": 2,
+      "min_weight_fraction_leaf": 0.0,
+      "monotonic_cst": null,
+      "n_estimators": 100,
+      "n_jobs": -1,
+      "oob_score": false,
+      "random_state": 42,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "hist_gradient_boosting": {
+      "categorical_features": "from_dtype",
+      "early_stopping": false,
+      "interaction_cst": null,
+      "l2_regularization": 0.0,
+      "learning_rate": 0.1,
+      "loss": "squared_error",
+      "max_bins": 255,
+      "max_depth": null,
+      "max_features": 1.0,
+      "max_iter": 100,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "monotonic_cst": null,
+      "n_iter_no_change": 10,
+      "quantile": null,
+      "random_state": 42,
+      "scoring": "loss",
+      "tol": 1e-07,
+      "validation_fraction": 0.1,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "folds": [
+    {
+      "fold": 1,
+      "train_start": "2011-01-08 00:00:00",
+      "train_end": "2012-07-10 23:00:00",
+      "validation_start": "2012-07-11 00:00:00",
+      "validation_end_exclusive": "2012-08-08 00:00:00",
+      "training_rows": 12918,
+      "eligible_validation_rows": 672,
+      "observed_validation_rows": 672
+    },
+    {
+      "fold": 2,
+      "train_start": "2011-01-08 00:00:00",
+      "train_end": "2012-08-07 23:00:00",
+      "validation_start": "2012-08-08 00:00:00",
+      "validation_end_exclusive": "2012-09-05 00:00:00",
+      "training_rows": 13590,
+      "eligible_validation_rows": 672,
+      "observed_validation_rows": 672
+    },
+    {
+      "fold": 3,
+      "train_start": "2011-01-08 00:00:00",
+      "train_end": "2012-09-04 23:00:00",
+      "validation_start": "2012-09-05 00:00:00",
+      "validation_end_exclusive": "2012-10-03 00:00:00",
+      "training_rows": 14262,
+      "eligible_validation_rows": 672,
+      "observed_validation_rows": 672
+    }
+  ],
+  "dataset_provenance": {
+    "download_url": "https://archive.ics.uci.edu/static/public/275/bike+sharing+dataset.zip",
+    "downloaded_at_utc": "2026-10-24T00:03:11.852789+00:00",
+    "sha256": "b70182d0d0508e9abbb79306ce5c0cec34869000f8220175ac83d11dbe845401",
+    "dataset_doi": "10.24432/C5W894",
+    "attribution": "Fanaee-T, Hadi. Bike Sharing. UCI Machine Learning Repository.",
+    "license": "CC BY 4.0"
+  },
+  "versions": {
+    "python": "3.11.4",
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1",
+    "joblib": "1.4.2"
+  },
+  "test_split": {
+    "test_start_inclusive": "2012-10-03 00:00:00",
+    "test_end_exclusive": "2013-01-01 00:00:00",
+    "evaluation": "rolling one-hour-ahead"
+  },
+  "limitations": [
+    "Only three recent 28-day validation blocks; not all seasons represented.",
+    "Missing lag_1 or lag_168 observations excluded for every model.",
+    "No weather inputs; no hyperparameter search; final test not evaluated.",
+    "Saved pipeline expects engineered features and requires nonnegative clipping at inference."
+  ]
+}

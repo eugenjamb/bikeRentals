@@ -1,0 +1,46 @@
+# Python environments and generated package files
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Test, notebook and tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.vscode/*
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Downloaded data and generated datasets; keep directory placeholders
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Rebuild trained pipelines locally; retain small metrics, figures and reports
+outputs/models/*
+!outputs/models/.gitkeep
+outputs/experiments/**/validation_predictions.csv
+
+# Future frontend build artifacts
+node_modules/
+.next/
+coverage/

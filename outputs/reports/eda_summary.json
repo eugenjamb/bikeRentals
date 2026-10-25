@@ -1,0 +1,51 @@
+{
+  "first_timestamp": "2011-01-01 00:00:00",
+  "last_timestamp": "2012-12-31 23:00:00",
+  "observed_rows": 17379,
+  "expected_hourly_rows": 17544,
+  "missing_timestamps": 165,
+  "development_observed_rows": 15259,
+  "development_missing_hours": 125,
+  "test_start": "2012-10-03 00:00:00",
+  "development_target_summary": {
+    "count": 15259.0,
+    "mean": 185.39078576577757,
+    "std": 178.08092583223691,
+    "min": 1.0,
+    "25%": 39.0,
+    "50%": 138.0,
+    "75%": 275.0,
+    "max": 977.0
+  },
+  "missing_values_in_observed_rows": {
+    "instant": 0,
+    "dteday": 0,
+    "season": 0,
+    "yr": 0,
+    "mnth": 0,
+    "hr": 0,
+    "holiday": 0,
+    "weekday": 0,
+    "workingday": 0,
+    "weathersit": 0,
+    "temp": 0,
+    "atemp": 0,
+    "hum": 0,
+    "windspeed": 0,
+    "casual": 0,
+    "registered": 0,
+    "cnt": 0,
+    "hour": 0,
+    "weekday_name": 0,
+    "month": 0
+  },
+  "development_weather_correlations": {
+    "cnt": 1.0,
+    "temp": 0.4352000244118904,
+    "atemp": 0.42862816804258447,
+    "hum": -0.32841530961010784,
+    "windspeed": 0.09954071602072434
+  },
+  "peak_mean_hour_workingday": 17,
+  "peak_mean_hour_nonworkingday": 13
+}
