@@ -1,0 +1,2 @@
+model,rows,pooled_mae,within_20_rentals_pct,within_50_rentals_pct,within_20_percent_pct,relative_tolerance_rows,relative_tolerance_excluded_zero_rows,wape_pct,p90_absolute_error,mean_signed_error
+hist_gradient_boosting,2016,31.603291928387115,52.28174603174603,80.45634920634922,74.55357142857143,2016,0,10.845374413173394,76.04860111005462,-6.879658859952322

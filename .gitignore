@@ -38,8 +38,11 @@ data/processed/*
 outputs/models/*
 !outputs/models/.gitkeep
 outputs/experiments/**/validation_predictions.csv
+outputs/experiments/**/test_predictions.csv
 
 # Future frontend build artifacts
 node_modules/
 .next/
 coverage/
+playwright-report/
+test-results/

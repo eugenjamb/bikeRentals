@@ -1,6 +1,6 @@
 # Initial EDA findings
 
-Generated-data inspection: 24 October 2026. Reproduce figures with `python model/run_eda.py` from the project root.
+Generated-data inspection: 24 October 2026. Reproduce figures with `python model/scripts/prepare.py` from the project root.
 
 ## Dataset and quality
 

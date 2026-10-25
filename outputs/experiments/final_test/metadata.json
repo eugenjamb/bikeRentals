@@ -1,0 +1,40 @@
+{
+  "evaluated_at_utc": "2026-10-25T19:16:19.136200+00:00",
+  "status": "final holdout evaluated; do not use these scores to tune this model",
+  "protocol": "rolling one-hour-ahead; fixed saved model; earlier actual test observations become later history",
+  "test_split": {
+    "test_start_inclusive": "2012-10-03 00:00:00",
+    "test_end_exclusive": "2013-01-01 00:00:00",
+    "evaluation": "rolling one-hour-ahead"
+  },
+  "coverage": {
+    "expected_hours": 2160,
+    "observed_target_hours": 2120,
+    "missing_target_hours": 40,
+    "observed_hours_excluded_missing_previous_hour": 5,
+    "additional_hours_excluded_missing_previous_week": 39,
+    "scored_hours": 2076,
+    "scored_fraction_of_observed": 0.9792452830188679
+  },
+  "selected_parameters": {
+    "regressor__l2_regularization": 1.0,
+    "regressor__learning_rate": 0.1,
+    "regressor__max_iter": 200,
+    "regressor__max_leaf_nodes": 31,
+    "select__feature_set": "calendar_and_history"
+  },
+  "model_sha256": "52396d7939f88ee30c8bea0d00b7da37b688e6d7d9dcdbb50f9a4422583bb4a2",
+  "hour_csv_sha256": "e03de4ee4ef4dc376ac6e04bf829673c6269e8eba5c60fa121640fa2f829504f",
+  "training_only_demand_band_thresholds": {
+    "q25": 42.0,
+    "q75": 279.0
+  },
+  "versions": {
+    "python": "3.11.4",
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1",
+    "joblib": "1.4.2"
+  },
+  "retrained_or_tuned": false
+}

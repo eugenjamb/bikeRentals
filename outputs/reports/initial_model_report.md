@@ -1,6 +1,6 @@
 # First model comparison: fixed settings
 
-This is an initial development experiment, not a final test evaluation. No GridSearchCV or other hyperparameter search was performed. Reproduce with `python model/train.py` after running EDA. Exact settings, library versions, dataset checksum, boundaries, fold metrics and validation predictions are recorded in `outputs/experiments/initial_fixed_settings/`.
+This is an initial development experiment, not a final test evaluation. No GridSearchCV or other hyperparameter search was performed. This is a historical record: alternative-model training has been removed from the active single-model workflow. See `model/README.md` for the current commands. Exact settings, library versions, dataset checksum, boundaries, fold metrics and validation predictions are recorded in `outputs/experiments/initial_fixed_settings/`.
 
 ## Validation
 

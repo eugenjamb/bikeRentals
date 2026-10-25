@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-from .config import OUTPUT_DIR, PROCESSED_DATA_DIR, RAW_DATA_PATH, TEST_PERIOD_DAYS
-from .data import load_hourly
+from ..config import OUTPUT_DIR, PROCESSED_DATA_DIR, RAW_DATA_PATH, TEST_PERIOD_DAYS
+from ..data import load_hourly
 
 
 def save_plot(fig, name):
