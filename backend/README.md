@@ -42,32 +42,57 @@ python -m pytest -c backend/pytest.ini backend/tests
 
 The production build in `frontend/dist` is served by the same FastAPI app when present. Nginx strips `/bike-rentals/` and forwards to loopback port 8003; `ROOT_PATH=/bike-rentals` keeps API docs aware of the external prefix.
 
-## VPS hosting: same approach as the existing apps
+## VPS hosting
 
-The application is copied directly to `/home/deploy/apps/bike-rentals`, with `.venv`, `backend`, `frontend`, `model` and `outputs` inside. There are no container or release-management tools. The model is served with Uvicorn under systemd; Nginx forwards the public path to loopback port 8003.
+The application is live at [https://169.58.96.231/bike-rentals/](https://169.58.96.231/bike-rentals/). Service and public health were verified on 25 October 2026.
 
-The new app's unit and route configurations are prepared on the VPS as `bike-rentals.service` and `bike-rentals.conf` in that app directory. Installation requires sudo in your SSH terminal:
+| Setting | Value |
+| --- | --- |
+| App directory | `/home/deploy/apps/bike-rentals` |
+| Runtime | Python venv + one Uvicorn worker |
+| Process manager | `bike-rentals.service` under systemd |
+| Internal address | `127.0.0.1:8003` |
+| Public route | `/bike-rentals/`, forwarded by Nginx |
+| Nginx snippet | `/etc/nginx/snippets/bike-rentals.conf` |
+| API docs | `https://169.58.96.231/bike-rentals/docs` |
 
-```bash
-ssh contabo
-sudo install -m 644 /home/deploy/apps/bike-rentals/bike-rentals.service /etc/systemd/system/bike-rentals.service
-sudo install -m 644 /home/deploy/apps/bike-rentals/bike-rentals.conf /etc/nginx/snippets/bike-rentals.conf
-```
+No containers or release-management folders are used. Existing Project 1, Project 2 and showcase services remain separate.
 
-Use `sudoedit /etc/nginx/sites-available/project1` and add this one include beside the existing showcase/project2 includes, inside the HTTPS server block. Keep all existing routes and certificate settings:
-
-```nginx
-include /etc/nginx/snippets/bike-rentals.conf;
-```
-
-Then validate/start the new app before reloading Nginx:
+From your own terminal, connect using the real address rather than relying on a local SSH alias:
 
 ```bash
-sudo nginx -t
-sudo systemctl daemon-reload
-sudo systemctl enable --now bike-rentals
+ssh deploy@169.58.96.231
+```
+
+Once logged into the VPS:
+
+```bash
+# Inspect the app and recent logs.
+systemctl status bike-rentals --no-pager
+sudo journalctl -u bike-rentals -n 50 --no-pager
+
+# Restart after deliberately updating backend code or the model.
+sudo systemctl restart bike-rentals
+
+# Check the internal and public API.
 curl -f http://127.0.0.1:8003/api/health
-sudo systemctl reload nginx
+curl -f https://169.58.96.231/bike-rentals/api/health
 ```
 
-Public URL after installation: `https://169.58.96.231/bike-rentals/`. This setup does not install or restart Project 1, Project 2 or the showcase services. Logs: `sudo journalctl -u bike-rentals -n 50 --no-pager`.
+The one-command startup helper prepared on this server is:
+
+```bash
+bash /home/deploy/apps/bike-rentals/start.sh
+```
+
+It requests sudo if needed, installs/starts this app's service, validates the Nginx configuration and checks public health. It refuses to overwrite an unexpectedly changed shared configuration. This helper is server-local; there is no `deploy/` folder in the repository.
+
+For frontend changes, rebuild locally with `npm run build` in `frontend`, then copy the built files from your local repository root:
+
+```bash
+scp -r frontend/dist/. deploy@169.58.96.231:/home/deploy/apps/bike-rentals/frontend/dist/
+```
+
+Static frontend changes do not require model retraining. Keep the model binary, exported study assets and recorded final-evaluation fingerprint consistent when changing model artifacts. The exporter rejects mismatched final-model fingerprints; do not present old scores as results of a new model.
+
+Sudo passwords and private SSH keys must never be committed or pasted into API requests.

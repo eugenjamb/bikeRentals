@@ -32,4 +32,4 @@ The validation blocks cover July through early October 2012, rather than every s
 
 `outputs/models/development_pipeline.joblib` contains the best learned pipeline refitted on eligible pre-test data. It accepts the engineered feature columns recorded in metadata; raw-history feature creation and nonnegative clipping remain the caller's responsibility. This is a development artifact, not a deployed API.
 
-The final 90-day test remains unscored. Before final evaluation, review feature choices and validation coverage. Hyperparameter tuning, if requested later, must stay inside development data. The frontend, API, Docker and server deployment are outside this modelling stage.
+At the time of this initial comparison, the final test had not been scored and hyperparameter tuning had not been performed. The project subsequently completed HGB tuning and final evaluation; see `hgb_grid_search.md` and `final_test_report.md`. This document preserves the earlier experiment rather than describing the current application status.

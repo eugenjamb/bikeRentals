@@ -1,6 +1,8 @@
 # Cyclecast frontend
 
-React + TypeScript + Vite. The application has two views:
+React + TypeScript + Vite, built with Node.js 24 and a pinned npm lock file.
+
+**Live:** [Cyclecast](https://169.58.96.231/bike-rentals/). The application has two views:
 
 - **The case study:** eight chronological chapters explaining the business scenario, dataset, EDA, leakage prevention, initial model choice, grid search, measured results and potential business value.
 - **Forecast lab:** five historical replays and a custom JSON request mode, calling the real prediction API.
@@ -32,6 +34,6 @@ Code map:
 - `src/api.ts` and `src/types.ts`: API boundary.
 - `src/styles.css`: shared visual system and responsive layout.
 - `src/ride.css`: bike photography, editorial hero and responsive image layout.
-- `public/images/` and `CREDITS.md`: locally served cycling photos and attribution.
+- `public/images/` and [CREDITS.md](CREDITS.md): locally served cycling photos and attribution.
 
 All measured values come from exported experiment artifacts. The financial calculator is explicitly hypothetical; no client profit or revenue lift is claimed. The replay is historical, not a current live-demand feed. Cycling photos illustrate city life rather than the source observations. The visual system uses charcoal, cream and orange, with an editorial photo-led hero.

@@ -1,5 +1,7 @@
 # Bike Rental Demand Prediction
 
+**Live application:** [Cyclecast — case study and forecast lab](https://169.58.96.231/bike-rentals/) · [API documentation](https://169.58.96.231/bike-rentals/docs)
+
 Predict next-hour bike rentals with Python, pandas and scikit-learn using the UCI Bike Sharing dataset.
 
 The active modelling workflow uses **one algorithm: Histogram Gradient Boosting regression**. It includes causal feature engineering, feature-set selection, chronological `GridSearchCV`, saved predictions and a complete fitted pipeline. The FastAPI backend and React/TypeScript frontend are implemented and tested. VPS hosting uses a Python virtual environment, systemd and Nginx, matching the existing applications.
@@ -83,6 +85,8 @@ This is 32 configurations × 3 folds = 96 CV fits, followed by refitting and dia
 
 The frontend walks through the problem, data quality, EDA, feature availability, initial comparison, grid search, learning curves and final-test results in eight chapters. Its forecast lab calls the actual saved model for five clearly labelled historical replay scenarios; advanced users can submit a validated custom request. All chart values and outcomes come from recorded experiment artifacts. Business value is presented as an editable planning-time scenario, not a claim of measured client profit.
 
+For a fresh clone, first complete the **Run locally** model workflow below. The fitted model and raw dataset are excluded from Git; training and evaluation generate the matching artifacts needed by the API. If your fitted model already exists, continue here.
+
 With your Python venv active, run from the repository root:
 
 ```bash
@@ -103,7 +107,6 @@ Open `http://127.0.0.1:5173/bike-rentals/`. Model training is not required when 
 
 - [Backend code and API contract](backend/README.md)
 - [Frontend development and browser tests](frontend/README.md)
-- [API and plain VPS hosting](backend/README.md)
 - [Model workflow and interview walkthrough](model/README.md)
 
 Runtime flow: browser → FastAPI validation → saved feature/preprocessing/HGB pipeline → prediction. Model loads once; no grid search or retraining happens during requests.
@@ -116,7 +119,7 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-VPS hosting uses a normal app directory and Python venv, managed by systemd behind Nginx. The app files are in `/home/deploy/apps/bike-rentals`; system service and routing installation still require sudo.
+The application is live at `https://169.58.96.231/bike-rentals/`. It runs from `/home/deploy/apps/bike-rentals` with a Python venv, one Uvicorn worker, systemd and Nginx. There are no Docker files or deployment folders. The public health endpoint was verified on 25 October 2026.
 
 ## Run locally
 
@@ -138,7 +141,7 @@ python model/scripts/prepare.py
 python model/scripts/train.py
 
 # Check leakage, chronological folds, pipeline serialization and diagnostics.
-python -m pytest -c model/pytest.ini
+python -m pytest -c model/pytest.ini model/tests
 
 # Regenerate prediction plots/reports from saved CV predictions without rerunning search.
 python model/scripts/evaluate.py --split validation
@@ -208,7 +211,7 @@ Small reference metrics, figures and reports are versioned. Data, environments, 
 
 Selection folds cover July through early October rather than every season, and their scores can be optimistic after grid search. The data is one historical city system. Immediate demand availability, timezone-naive hour labels and holiday-calendar availability are assumptions. Large peak-hour errors deserve attention even when average MAE is low.
 
-The selected configuration was frozen before final-test evaluation. Keep the resulting score as a final assessment rather than tuning against it. The API and frontend are implemented and tested. The app is copied to `/home/deploy/apps/bike-rentals` in a standard directory layout. Installing its systemd service and Nginx route still requires sudo; see `backend/README.md`.
+The selected configuration was frozen before final-test evaluation. Keep the resulting score as a final assessment rather than tuning against it. The API and frontend are implemented and tested. The app is running on the VPS in a standard directory layout with systemd and Nginx. See `backend/README.md` for restart commands, logs and health checks.
 
 ## Dataset attribution
 

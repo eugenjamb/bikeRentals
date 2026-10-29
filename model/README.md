@@ -86,7 +86,7 @@ model/
 ## Tests and artifacts
 
 ```bash
-python -m pytest -c model/pytest.ini
+python -m pytest -c model/pytest.ini model/tests
 ```
 
 Tests cover missing timestamps, future-demand leakage, past-only requests, pipeline serialization, chronological folds, grid integration, metric edge cases and evaluation without fitting.
@@ -99,3 +99,9 @@ Outputs stay outside the source directory:
 - `outputs/figures/` and `outputs/reports/`: plots and explanations.
 
 The cleanup preserves saved-pipeline class locations and does not require retraining. Dependencies and modelling settings remain unchanged. `requirements.txt` pins direct dependencies; `requirements-lock.txt` records the full reference Windows environment.
+
+## Application integration
+
+The fitted pipeline is loaded once by `backend/app/service.py`; inference does not call grid search or retrain. The API validates 168 ordered past hourly positions and rejects target/future observations before passing them to the same feature pipeline.
+
+For setup, routes and serving details, see the [backend guide](../backend/README.md). The [frontend guide](../frontend/README.md) explains the case study and historical forecast lab. The raw dataset and model binary are ignored by Git, so a fresh clone needs preparation, training and evaluation before exporting matching showcase assets.
